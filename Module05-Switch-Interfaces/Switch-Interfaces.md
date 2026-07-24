@@ -2,35 +2,66 @@
 
 ## Overview
 
-Switch interfaces connect network devices and operate using two main parameters:
+A switch interface connects network devices and defines how data is transmitted through the network.
 
-- **Speed**: Defines the transmission rate (10, 100, or 1000 Mbps).
-- **Duplex**: Defines how data is transmitted.
+## Interface Speed
+
+Common interface speeds include:
+
+- 10 Mbps
+- 100 Mbps
+- 1000 Mbps (1 Gbps)
+
+Both devices should use compatible speed settings.
 
 ## Duplex Modes
 
-- **Half Duplex:** Devices send or receive data, but not at the same time.
-- **Full Duplex:** Devices can send and receive simultaneously with no collisions.
+### Half Duplex
+
+- One device transmits at a time.
+- Collisions may occur.
+
+### Full Duplex
+
+- Devices transmit and receive simultaneously.
+- No collisions.
+- Standard mode in modern Ethernet networks.
 
 ## Auto-Negotiation
 
-Auto-Negotiation allows two connected devices to automatically agree on the highest supported speed and duplex settings.
+Auto-Negotiation automatically selects the highest compatible speed and duplex between connected devices.
 
-## Duplex Mismatch
+If one side is manually configured while the other uses Auto-Negotiation:
 
-If one device uses Auto-Negotiation and the other is manually configured:
+- Speed is usually detected correctly.
+- Duplex defaults to Half Duplex.
+- This may cause a Duplex Mismatch.
 
-- The speed can usually be detected.
-- The duplex defaults to **Half Duplex**.
+## Interface Status
 
-This creates a **duplex mismatch**, which can cause:
+Cisco interfaces can have different states:
 
+- **up/up** → Interface is operating normally.
+- **administratively down** → Interface disabled with `shutdown`.
+- **down** → Physical connection is unavailable.
+
+## Interface Counters and Errors
+
+The `show interfaces` command displays:
+
+- Interface speed
+- Duplex mode
+- Interface status
+- Packet counters
+- CRC errors
 - Collisions
-- Packet loss
-- Poor network performance
+- Dropped packets
 
-## Key Points
+These statistics help troubleshoot network issues.
 
-- Auto + Auto → Best Speed + Full Duplex
-- Manual + Manual → Matching configuration required
-- Auto + Manual → Speed detected, Duplex becomes Half Duplex
+## Key Takeaways
+
+- Configure matching speed and duplex on both ends.
+- Prefer Auto-Negotiation when supported.
+- Use `show interfaces` to monitor interface health.
+- Check counters and errors when troubleshooting connectivity problems.
